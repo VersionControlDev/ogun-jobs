@@ -1,8 +1,9 @@
+<template>
+  <Layout>
+    <router-view></router-view>
+  </Layout>
+</template>
+
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
 import Layout from './components/Layout.vue';
 </script>
-
-<template>
-  <Layout />
-</template>

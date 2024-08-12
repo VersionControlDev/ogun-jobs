@@ -1,24 +1,16 @@
 <template>
   <div>
     <Navbar />
-    <router-view />
+    <main>
+      <slot></slot>
+    </main>
     <Footer />
   </div>
 </template>
 
-<script>
-import router from '../router';
-import Footer from './Footer.vue';
-import Navbar from './Navbar.vue';
-
-export default {
-    components: {
-        Navbar,
-        Footer
-    }
-}
+<script setup>
+import Footer from "./Footer.vue";
+import Navbar from "./Navbar.vue";
 </script>
 
-<style>
-
-</style>
+<style></style>

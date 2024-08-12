@@ -1,6 +1,7 @@
 import '../../assets/css/style.css'
 import { createRouter, createWebHistory } from 'vue-router'
-import LandingPage from '../components/LandingPage.vue'
+// import LandingPage from '../components/LandingPage.vue'
+import HomeView from '@/views/HomeView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -8,17 +9,30 @@ const router = createRouter({
     {
       path: '/',
       name: 'LandingPage',
-      component: LandingPage
+      component: HomeView
     },
     {
       path: '/find-jobs',
       name: 'find-jobs',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import('../views/FindJobs.vue')
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: () => import('../views/Login.vue')
+    },
+    {
+      path: '/register',
+      name: 'Register',
+      component: () => import('../views/Register.vue')
+    },
+    {
+      path: '/forgot-password', // Add this route for the Forgot Password page
+      name: 'ForgotPassword',
+      component: () => import('../views/ForgotPassword.vue')
     }
   ]
+
 })
 
 export default router
