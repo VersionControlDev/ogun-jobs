@@ -137,10 +137,8 @@
       </div>
 </template>
 
-<script>
-export default {
-    name:'Footer'
-}
+<script setup>
+
 </script>
 
 <style>
