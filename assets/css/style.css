@@ -7242,6 +7242,17 @@ form.search-box .search-form a {
     border-radius: 5px
 }
 
+.nice-select1{
+    width: 100px;
+    /* height: 40px; */
+    background: #fff;
+    border-radius: 0px;
+    padding: 10px 12px;
+    color: #5d5d5d;
+    line-height: 6px;
+    border: 1px solid #ededed;
+    border-radius: 5px
+}
 @media (max-width: 767px) {
     .job-listing-area .count-job .select-job-items .nice-select {
         margin-bottom: 20px;
