@@ -45,9 +45,21 @@
 }
 
 .single-slider {
-    background: url('../img/hero/yay-transformed.jpeg');
-    
-}
+    position: relative;
+    background: url('../img/hero/yay-transformed.jpeg') no-repeat center center;
+    background-size: cover;
+  }
+  
+  .single-slider::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); 
+  }
+  
 
 .boxed-btn {
     background: #fff;

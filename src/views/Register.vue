@@ -29,7 +29,7 @@
                   <label for="companyName">Company Name</label>
                   <input
                     type="text"
-                    class="form-control rounded-pill"
+                    class="form-control"
                     id="companyName"
                     v-model="companyName"
                     placeholder="Enter company name"
@@ -42,7 +42,7 @@
                   <label for="companyAddress">Company Address</label>
                   <input
                     type="text"
-                    class="form-control rounded-pill"
+                    class="form-control"
                     id="companyAddress"
                     v-model="companyAddress"
                     placeholder="Enter company address"
@@ -56,7 +56,7 @@
                 <label for="fullName">Full Name</label>
                 <input
                   type="text"
-                  class="form-control rounded-pill"
+                  class="form-control"
                   id="fullName"
                   v-model="fullName"
                   placeholder="Enter full name"
@@ -69,7 +69,7 @@
                 <label for="email">Email Address</label>
                 <input
                   type="email"
-                  class="form-control rounded-pill"
+                  class="form-control"
                   id="email"
                   v-model="email"
                   placeholder="Enter email"
@@ -82,7 +82,7 @@
                 <label for="password">Password</label>
                 <input
                   type="password"
-                  class="form-control rounded-pill"
+                  class="form-control"
                   id="password"
                   v-model="password"
                   placeholder="Enter password"
@@ -95,7 +95,7 @@
                 <label for="confirmPassword">Confirm Password</label>
                 <input
                   type="password"
-                  class="form-control rounded-pill"
+                  class="form-control"
                   id="confirmPassword"
                   v-model="confirmPassword"
                   placeholder="Confirm password"
@@ -106,9 +106,10 @@
               </div>
               <button
                 type="submit"
-                class="btn btn-dark w-100 rounded-pill"
+                class="btn btn-dark w-100"
                 :disabled="isSubmitting"
               >
+                <span v-if="isSubmitting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                 {{ isSubmitting ? "Registering..." : "Register" }}
               </button>
             </form>
@@ -124,7 +125,9 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
+import axiosInstance from '../../api'; // Adjust the path as needed
+import { useRouter } from 'vue-router'; // Import Vue Router for navigation
 
 const isEmployer = ref(true);
 const companyName = ref("");
@@ -135,6 +138,7 @@ const password = ref("");
 const confirmPassword = ref("");
 const errors = ref({});
 const isSubmitting = ref(false);
+const router = useRouter(); // Initialize the router
 
 const validateForm = () => {
   errors.value = {};
@@ -177,20 +181,49 @@ const validateForm = () => {
   return isValid;
 };
 
-const handleSubmit = () => {
+// Computed property to check if the form is completely filled
+const isFormComplete = computed(() => {
+  if (isEmployer.value) {
+    return companyName.value && companyAddress.value && fullName.value && email.value && password.value && confirmPassword.value;
+  }
+  return fullName.value && email.value && password.value && confirmPassword.value;
+});
+
+// Computed property to check if passwords match
+const passwordsMatch = computed(() => {
+  return password.value && confirmPassword.value && password.value === confirmPassword.value;
+});
+
+const handleSubmit = async () => {
   if (!validateForm()) return;
 
   isSubmitting.value = true;
 
-  // Simulate registration process with a delay
-  setTimeout(() => {
+  try {
+    // Simulate a 2-second API call
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    
+    // Perform the registration API call
+    const response = await axiosInstance.post('/signup', {
+      fullName: fullName.value,
+      email: email.value,
+      password: password.value,
+      companyName: isEmployer.value ? companyName.value : undefined,
+      companyAddress: isEmployer.value ? companyAddress.value : undefined,
+    });
+
     alert("Registration successful!");
     isSubmitting.value = false;
-    // Normally, redirect here, e.g., router.push('/login');
-  }, 1000);
+
+    // Redirect to the login page
+    router.push('/login');
+  } catch (error) {
+    console.error('Registration error:', error.response?.data || error.message);
+    alert('Registration failed. Please try again.');
+    isSubmitting.value = false;
+  }
 };
 </script>
-
 <style scoped>
 .container {
   max-width: 900px;
@@ -212,7 +245,7 @@ const handleSubmit = () => {
 .toggle-button {
   font-size: 1.2rem;
   padding: 0.5rem 2rem;
-  border-radius: 20px;
+  border-radius: 6px;
 }
 
 button.active {
