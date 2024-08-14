@@ -50,7 +50,7 @@ const reloadPage = () => {
                       <li><router-link to="/">Home</router-link></li>
                       <li><router-link to="/about">About</router-link></li>
                       <li>
-                        <router-link to="/find-jobs">Find a Jobs </router-link>
+                        <router-link to="/find-jobs">Find Job </router-link>
                       </li>
                       <li>
                         <span class="cursor-pointer">Page</span>
@@ -135,7 +135,7 @@ const reloadPage = () => {
                         @click="closeMenu"
                         role="menuitem"
                         tabindex="-1"
-                        >Find a Job</router-link
+                        >Find Job</router-link
                       >
                     </li>
                     <li class="slicknav_collapsed slicknav_parent">

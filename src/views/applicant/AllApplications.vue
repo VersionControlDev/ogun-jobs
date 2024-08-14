@@ -49,6 +49,9 @@ const appliedJobs = computed(() => {
         <div class="card-body">
           <h5 class="card-title">{{ job.title }}</h5>
           <p class="card-text">{{ job.description }}</p>
+          <p class="card-text">{{ job.location }}</p>
+          <p class="card-text">{{ job.salary }}</p>
+          <!-- <p class="card-text">{{ job.date }}</p> -->
           <p class="text-muted">
             Applied on: {{ new Date(job.appliedAt).toLocaleDateString() }}
           </p>

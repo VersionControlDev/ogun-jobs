@@ -57,6 +57,9 @@ const userApplications = computed(() => {
 const getJobTitle = (jobId) => {
   const job = jobs.value.find((j) => j.id === jobId);
   return job ? job.title : "Unknown Job";
+  return job ? job.description : "Unknown description";
+  return job ? job.location : "Unknown location";
+  return job ? job.salary : "Unknown salary";
 };
 </script>
 
@@ -69,6 +72,8 @@ const getJobTitle = (jobId) => {
       <div class="card-body">
         <h5 class="card-title">{{ job.title }}</h5>
         <p class="card-text">{{ job.description }}</p>
+        <p class="card-text">{{ job.location }}</p>
+        <p class="card-text">{{ job.salary }}</p>
         <button
           class="btn"
           :class="hasApplied(job.id) ? 'btn-secondary' : 'btn-primary'"

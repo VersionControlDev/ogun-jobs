@@ -5,7 +5,7 @@ import { useToast } from "vue-toast-notification";
 const toast = useToast();
 const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
 const showJobForm = ref(false);
-const jobForm = ref({ title: "", description: "" });
+const jobForm = ref({ title: "", description: "", location: "", salary: "", job_type:"", date: "" });
 const jobs = ref([]);
 const applications = ref([]);
 const selectedJob = ref(null);
@@ -78,7 +78,7 @@ const cancelEdit = () => {
 const resetForm = () => {
   showJobForm.value = false;
   editingJob.value = null;
-  jobForm.value = { title: "", description: "" };
+  jobForm.value = { title: "", description: "", location: "", salary: "", date: "" };
 };
 
 const postedJobs = computed(() => {
@@ -137,6 +137,41 @@ const selectedJobApplicants = computed(() => {
               required
             ></textarea>
           </div>
+          <div class="mb-3">
+            <label for="title" class="form-label">Job Location</label>
+            <select class="form-control" v-model="jobForm.location">
+              <option value="Lagos">Lagos</option>
+              <option value="Ogun">Ogun</option>
+              <option value="Osun">Osun</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="title" class="form-label">Job Salary</label>
+            <input
+              type="text"
+              class="form-control"
+              id="title"
+              v-model="jobForm.salary"
+              required
+            />
+          </div>
+          <div>
+            <label for="title" class="form-label">Job Type</label>
+            <select class="form-control mb-3" v-model="jobForm.job_type">
+            <option value="Full Time">Full Time</option>
+            <option value="Part Time">Part Time</option>
+          </select>
+          </div>
+          <div class="mb-3">
+            <label for="title" class="form-label">Job Date</label>
+            <input
+              type="date"
+              class="form-control"
+              id="title"
+              v-model="jobForm.date"
+              required
+            />
+          </div>
           <button type="submit" class="btn btn-success">
             {{ editingJob ? "Update Job" : "Post Job" }}
           </button>
@@ -156,6 +191,10 @@ const selectedJobApplicants = computed(() => {
       <div class="card-body">
         <h5 class="card-title">{{ job.title }}</h5>
         <p class="card-text">{{ job.description }}</p>
+        <p class="card-text">{{ job.location }}</p>
+        <p class="card-text">{{ job.salary }}</p>
+        <p class="card-text">{{ job.job_type }}</p>
+        <p class="card-text">{{ job.date }}</p>
         <button class="btn btn-info me-2" @click="viewApplicants(job.id)">
           View Applicants ({{ getApplicantCount(job.id) }})
         </button>
