@@ -1,131 +1,11 @@
-<template>
-  <div class="container my-5">
-    <div class="row justify-content-center">
-      <div class="col-md-8">
-        <div class="card shadow">
-          <div class="card-header text-center bg-dark">
-            <h3 class="text-white">Register</h3>
-          </div>
-          <div class="card-body p-4">
-            <div class="d-flex justify-content-center mb-4">
-              <button
-                class="btn btn-outline-dark me-2 toggle-button p-4"
-                :class="{ active: isEmployer }"
-                @click="isEmployer = true"
-              >
-                Employer
-              </button>
-              <button
-                class="btn btn-outline-dark toggle-button"
-                :class="{ active: !isEmployer }"
-                @click="isEmployer = false"
-              >
-                Applicant
-              </button>
-            </div>
-            <form @submit.prevent="handleSubmit">
-              <div v-if="isEmployer">
-                <div class="form-group mb-3">
-                  <label for="companyName">Company Name</label>
-                  <input
-                    type="text"
-                    class="form-control rounded-pill"
-                    id="companyName"
-                    v-model="companyName"
-                    placeholder="Enter company name"
-                  />
-                  <div v-if="errors.companyName" class="text-danger mt-2">
-                    {{ errors.companyName }}
-                  </div>
-                </div>
-                <div class="form-group mb-3">
-                  <label for="companyAddress">Company Address</label>
-                  <input
-                    type="text"
-                    class="form-control rounded-pill"
-                    id="companyAddress"
-                    v-model="companyAddress"
-                    placeholder="Enter company address"
-                  />
-                  <div v-if="errors.companyAddress" class="text-danger mt-2">
-                    {{ errors.companyAddress }}
-                  </div>
-                </div>
-              </div>
-              <div class="form-group mb-3">
-                <label for="fullName">Full Name</label>
-                <input
-                  type="text"
-                  class="form-control rounded-pill"
-                  id="fullName"
-                  v-model="fullName"
-                  placeholder="Enter full name"
-                />
-                <div v-if="errors.fullName" class="text-danger mt-2">
-                  {{ errors.fullName }}
-                </div>
-              </div>
-              <div class="form-group mb-3">
-                <label for="email">Email Address</label>
-                <input
-                  type="email"
-                  class="form-control rounded-pill"
-                  id="email"
-                  v-model="email"
-                  placeholder="Enter email"
-                />
-                <div v-if="errors.email" class="text-danger mt-2">
-                  {{ errors.email }}
-                </div>
-              </div>
-              <div class="form-group mb-3">
-                <label for="password">Password</label>
-                <input
-                  type="password"
-                  class="form-control rounded-pill"
-                  id="password"
-                  v-model="password"
-                  placeholder="Enter password"
-                />
-                <div v-if="errors.password" class="text-danger mt-2">
-                  {{ errors.password }}
-                </div>
-              </div>
-              <div class="form-group mb-4">
-                <label for="confirmPassword">Confirm Password</label>
-                <input
-                  type="password"
-                  class="form-control rounded-pill"
-                  id="confirmPassword"
-                  v-model="confirmPassword"
-                  placeholder="Confirm password"
-                />
-                <div v-if="errors.confirmPassword" class="text-danger mt-2">
-                  {{ errors.confirmPassword }}
-                </div>
-              </div>
-              <button
-                type="submit"
-                class="btn btn-dark w-100 rounded-pill"
-                :disabled="isSubmitting"
-              >
-                {{ isSubmitting ? "Registering..." : "Register" }}
-              </button>
-            </form>
-          </div>
-          <div class="card-footer text-center bg-light">
-            Already have an account?
-            <router-link to="/login" class="text-primary">Login</router-link>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
+import axiosInstance from "../../api"; // Adjust the path as needed
+import { useRouter } from "vue-router"; // Import Vue Router for navigation
+import { useToast } from "vue-toast-notification";
+import "vue-toast-notification/dist/theme-sugar.css";
 
+const toast = useToast();
 const isEmployer = ref(true);
 const companyName = ref("");
 const companyAddress = ref("");
@@ -135,6 +15,7 @@ const password = ref("");
 const confirmPassword = ref("");
 const errors = ref({});
 const isSubmitting = ref(false);
+const router = useRouter(); // Initialize the router
 
 const validateForm = () => {
   errors.value = {};
@@ -177,19 +58,208 @@ const validateForm = () => {
   return isValid;
 };
 
-const handleSubmit = () => {
+// Computed property to check if the form is completely filled
+const isFormComplete = computed(() => {
+  if (isEmployer.value) {
+    return (
+      companyName.value &&
+      companyAddress.value &&
+      fullName.value &&
+      email.value &&
+      password.value &&
+      confirmPassword.value
+    );
+  }
+  return (
+    fullName.value && email.value && password.value && confirmPassword.value
+  );
+});
+
+// Computed property to check if passwords match
+const passwordsMatch = computed(() => {
+  return (
+    password.value &&
+    confirmPassword.value &&
+    password.value === confirmPassword.value
+  );
+});
+
+const handleSubmit = async () => {
+  // Validate form fields
   if (!validateForm()) return;
+
+  // Check if the form is complete
+  if (!isFormComplete.value) {
+    toast.error("Please complete all required fields.");
+    return;
+  }
+
+  // Check if passwords match
+  if (!passwordsMatch.value) {
+    toast.error("Passwords do not match.");
+    return;
+  }
 
   isSubmitting.value = true;
 
-  // Simulate registration process with a delay
-  setTimeout(() => {
-    alert("Registration successful!");
+  try {
+    // Simulate a 2-second API call
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
+    // Perform the registration API call
+    const response = await axiosInstance.post("/signup", {
+      fullName: fullName.value,
+      email: email.value,
+      password: password.value,
+      companyName: isEmployer.value ? companyName.value : undefined,
+      companyAddress: isEmployer.value ? companyAddress.value : undefined,
+    });
+
+    // Display success toast notification
+    toast.success("Registration successful!");
     isSubmitting.value = false;
-    // Normally, redirect here, e.g., router.push('/login');
-  }, 1000);
+
+    // Redirect to the login page
+    router.push("/login");
+  } catch (error) {
+    console.error("Registration error:", error.response?.data || error.message);
+    // Display error toast notification
+    toast.error("Registration failed. Please try again.");
+    isSubmitting.value = false;
+  }
 };
 </script>
+
+<template>
+  <div class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card shadow">
+          <div class="card-header text-center bg-dark">
+            <h3 class="text-white">Register</h3>
+          </div>
+          <div class="card-body p-4">
+            <div class="d-flex justify-content-center mb-4">
+              <button
+                class="btn btn-outline-dark me-2 toggle-button p-4"
+                :class="{ active: isEmployer }"
+                @click="isEmployer = true"
+              >
+                As Employer
+              </button>
+              <button
+                class="btn btn-outline-dark toggle-button"
+                :class="{ active: !isEmployer }"
+                @click="isEmployer = false"
+              >
+               As Applicant
+              </button>
+            </div>
+            <form @submit.prevent="handleSubmit">
+              <div v-if="isEmployer">
+                <div class="form-group mb-3">
+                  <label for="companyName">Company Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="companyName"
+                    v-model="companyName"
+                    placeholder="Enter company name"
+                  />
+                  <div v-if="errors.companyName" class="text-danger mt-2">
+                    {{ errors.companyName }}
+                  </div>
+                </div>
+                <div class="form-group mb-3">
+                  <label for="companyAddress">Company Address</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="companyAddress"
+                    v-model="companyAddress"
+                    placeholder="Enter company address"
+                  />
+                  <div v-if="errors.companyAddress" class="text-danger mt-2">
+                    {{ errors.companyAddress }}
+                  </div>
+                </div>
+              </div>
+              <div class="form-group mb-3">
+                <label for="fullName">Full Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="fullName"
+                  v-model="fullName"
+                  placeholder="Enter full name"
+                />
+                <div v-if="errors.fullName" class="text-danger mt-2">
+                  {{ errors.fullName }}
+                </div>
+              </div>
+              <div class="form-group mb-3">
+                <label for="email">Email Address</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  v-model="email"
+                  placeholder="Enter email"
+                />
+                <div v-if="errors.email" class="text-danger mt-2">
+                  {{ errors.email }}
+                </div>
+              </div>
+              <div class="form-group mb-3">
+                <label for="password">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  v-model="password"
+                  placeholder="Enter password"
+                />
+                <div v-if="errors.password" class="text-danger mt-2">
+                  {{ errors.password }}
+                </div>
+              </div>
+              <div class="form-group mb-4">
+                <label for="confirmPassword">Confirm Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="confirmPassword"
+                  v-model="confirmPassword"
+                  placeholder="Confirm password"
+                />
+                <div v-if="errors.confirmPassword" class="text-danger mt-2">
+                  {{ errors.confirmPassword }}
+                </div>
+              </div>
+              <button
+                type="submit"
+                class="btn btn-dark w-100"
+                :disabled="isSubmitting"
+              >
+                <span
+                  v-if="isSubmitting"
+                  class="spinner-border spinner-border-sm"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+                {{ isSubmitting ? "Registering..." : "Register" }}
+              </button>
+            </form>
+          </div>
+          <div class="card-footer text-center bg-light">
+            Already have an account?
+            <router-link to="/login" class="text-primary">Login</router-link>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
 
 <style scoped>
 .container {
@@ -212,7 +282,7 @@ const handleSubmit = () => {
 .toggle-button {
   font-size: 1.2rem;
   padding: 0.5rem 2rem;
-  border-radius: 20px;
+  border-radius: 6px;
 }
 
 button.active {

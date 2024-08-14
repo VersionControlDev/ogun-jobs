@@ -1,12 +1,30 @@
-import { createApp } from 'vue'
-import { createPinia } from 'pinia'
+import { createApp } from 'vue';
+import { createPinia } from 'pinia';
+import '@fortawesome/fontawesome-free/css/all.css';
 
-import App from './App.vue'
-import router from './router'
+import ToastPlugin from 'vue-toast-notification';
+import 'vue-toast-notification/dist/theme-bootstrap.css';
 
-const app = createApp(App)
+// Vuetify
+import 'vuetify/styles'
+import { createVuetify } from 'vuetify';
+import * as components from 'vuetify/components';
+import * as directives from 'vuetify/directives';
 
-app.use(createPinia())
-app.use(router)
+import App from './App.vue';
+import router from './router';
 
-app.mount('#app')
+const app = createApp(App);
+
+const vuetify = createVuetify({
+    components,
+    directives,
+});
+
+app.use(createPinia());
+app.use(router);
+app.use(ToastPlugin);
+app.use(vuetify);
+
+
+app.mount('#app');

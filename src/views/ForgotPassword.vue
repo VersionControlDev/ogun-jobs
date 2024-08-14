@@ -4,7 +4,7 @@
         <div class="col-md-6">
           <div class="card shadow-lg">
             <div class="card-header text-center bg-dark text-light">
-              <h3>Forgot Password</h3>
+              <h3 class="text-white">Forgot Password</h3>
             </div>
             <div class="card-body p-4">
               <form @submit.prevent="handleSubmit">
@@ -29,7 +29,7 @@
               </form>
             </div>
             <div class="card-footer text-center bg-light">
-              <router-link to="/login" class="text-dark">Back to Login</router-link>
+              <router-link to="/login" class="text-primary">Back to Login</router-link>
             </div>
           </div>
         </div>

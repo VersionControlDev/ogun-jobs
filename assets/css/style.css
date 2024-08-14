@@ -45,9 +45,21 @@
 }
 
 .single-slider {
-    background: url('../img/hero/yay-transformed.jpeg');
-    
+    position: relative;
+    background: url('../img/hero/yay-transformed.jpeg') no-repeat center center;
+    background-size: cover;
 }
+
+.single-slider::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
 
 .boxed-btn {
     background: #fff;
@@ -6400,7 +6412,7 @@ form.search-box .search-form a {
 .support-company-area .support-location-img .support-img-cap {
     position: absolute;
     bottom: 0px;
-    background:#008600;
+    background: #008600;
     padding: 59px 28px;
     border-radius: 5px;
     left: -100px
@@ -6633,7 +6645,13 @@ form.search-box .search-form a {
 }
 
 .single-job-items:hover {
-    box-shadow: 0px 22px 57px 0px rgba(34, 41, 72, 0.05)
+    box-shadow: 0px 22px 57px 0px rgba(34, 41, 72, 0.05);
+    border: 1px solid #008600;
+    -webkit-transition: .4s;
+    -moz-transition: .4s;
+    -o-transition: .4s;
+    transition: .4s;
+    border-radius: 7px;
 }
 
 .single-job-items .job-items {
@@ -7242,7 +7260,7 @@ form.search-box .search-form a {
     border-radius: 5px
 }
 
-.nice-select1{
+.nice-select1 {
     width: 100px;
     /* height: 40px; */
     background: #fff;
@@ -7253,6 +7271,7 @@ form.search-box .search-form a {
     border: 1px solid #ededed;
     border-radius: 5px
 }
+
 @media (max-width: 767px) {
     .job-listing-area .count-job .select-job-items .nice-select {
         margin-bottom: 20px;

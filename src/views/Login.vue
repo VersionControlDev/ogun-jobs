@@ -1,3 +1,60 @@
+<script setup>
+import { ref } from "vue";
+import axiosInstance from "../../api";
+import { useRouter } from "vue-router";
+import { useToast } from "vue-toast-notification";
+import "vue-toast-notification/dist/theme-sugar.css";
+
+const toast = useToast();
+const email = ref("");
+const password = ref("");
+const errors = ref({});
+const isSubmitting = ref(false);
+const router = useRouter();
+
+const validateForm = () => {
+  if (!email.value || !password.value) {
+    toast.error('Please fill in all fields');
+    return false;
+  }
+  return true;
+};
+
+const handleSubmit = async () => {
+  if (!validateForm()) return;
+
+  isSubmitting.value = true;
+
+  try {
+    const response = await axiosInstance.post("/login", {
+      email: email.value,
+      password: password.value,
+    });
+
+    setTimeout(() => {
+      const { session, user } = response.data;
+      toast.success("Login successful! Redirecting...");
+
+        // Save user data to localStorage
+      localStorage.setItem('loggedInUser', JSON.stringify(user));
+
+
+      // Redirect based on role
+      if (user.role === "employer") {
+        router.push("/employer-dashboard");
+      } else if (user.role === "applicant") {
+        router.push("/applicant-dashboard");
+      }
+
+      isSubmitting.value = false;
+    }, 2000);
+  } catch (error) {
+    isSubmitting.value = false;
+    toast.error(error.response?.data?.message || "An error occurred");
+  }
+};
+</script>
+
 <template>
   <div class="container my-5">
     <div class="row justify-content-center align-items-center">
@@ -23,7 +80,7 @@
                     <label for="email">Email Address</label>
                     <input
                       type="email"
-                      class="form-control rounded-pill"
+                      class="form-control"
                       id="email"
                       v-model="email"
                       placeholder="Enter email"
@@ -36,7 +93,7 @@
                     <label for="password">Password</label>
                     <input
                       type="password"
-                      class="form-control rounded-pill"
+                      class="form-control"
                       id="password"
                       v-model="password"
                       placeholder="Enter password"
@@ -54,9 +111,15 @@
                   </div>
                   <button
                     type="submit"
-                    class="btn btn-dark w-100 rounded-pill"
+                    class="btn btn-dark w-100"
                     :disabled="isSubmitting"
                   >
+                    <span
+                      v-if="isSubmitting"
+                      class="spinner-border spinner-border-sm"
+                      role="status"
+                      aria-hidden="true"
+                    ></span>
                     {{ isSubmitting ? "Logging in..." : "Login" }}
                   </button>
                 </form>
@@ -75,49 +138,14 @@
   </div>
 </template>
 
-<script setup>
-import { ref } from "vue";
-
-const email = ref("");
-const password = ref("");
-const errors = ref({});
-const isSubmitting = ref(false);
-
-const validateForm = () => {
-  errors.value = {};
-  let isValid = true;
-
-  if (!email.value) {
-    errors.value.email = "Email is required";
-    isValid = false;
-  } else if (!/\S+@\S+\.\S+/.test(email.value)) {
-    errors.value.email = "Email is invalid";
-    isValid = false;
-  }
-
-  if (!password.value) {
-    errors.value.password = "Password is required";
-    isValid = false;
-  }
-
-  return isValid;
-};
-
-const handleSubmit = () => {
-  if (!validateForm()) return;
-
-  isSubmitting.value = true;
-
-  // Simulate successful login with a delay
-  setTimeout(() => {
-    alert("Login successful!");
-    isSubmitting.value = false;
-    // Normally, redirect here, e.g., router.push('/dashboard');
-  }, 1000);
-};
-</script>
-
 <style scoped>
+/* Add spinner styles */
+.spinner-border {
+  width: 1.2rem;
+  height: 1.2rem;
+  border-width: 0.2em;
+}
+
 .container {
   max-width: 900px;
 }

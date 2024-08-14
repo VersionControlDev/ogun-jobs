@@ -4,7 +4,7 @@
       <!-- Hero Area Start-->
       <div class="slider-area">
         <div
-          class="single-slider section-overly slider-height2 d-flex align-items-center"
+          class="single-slider section-overlay slider-height2 d-flex align-items-center"
         >
           <div class="container">
             <div class="row">
@@ -174,116 +174,6 @@
                     </label>
                   </div>
                   <!-- select-Categories End -->
-                </div>
-                <div class="single-listing">
-                  <!-- Range Slider Start -->
-                  <aside
-                    class="left_widgets p_filter_widgets price_rangs_aside sidebar_box_shadow"
-                  >
-                    <div class="small-section-tittle2">
-                      <h4>Filter Jobs</h4>
-                    </div>
-                    <div class="widgets_inner">
-                      <div class="range_item">
-                        <!-- <div id="slider-range"></div> -->
-                        <span class="irs js-irs-0"
-                          ><span class="irs"
-                            ><span class="irs-line" tabindex="-1"
-                              ><span class="irs-line-left"></span
-                              ><span class="irs-line-mid"></span
-                              ><span class="irs-line-right"></span></span
-                            ><span class="irs-min" style="visibility: hidden"
-                              >tk. 0</span
-                            ><span class="irs-max" style="visibility: visible"
-                              >tk. 1.000</span
-                            ><span
-                              class="irs-from"
-                              style="visibility: visible; left: 0%"
-                              >tk. 0</span
-                            ><span
-                              class="irs-to"
-                              style="visibility: visible; left: 35.3448%"
-                              >tk. 500</span
-                            ><span
-                              class="irs-single"
-                              style="visibility: hidden; left: 4.45402%"
-                              >tk. 0 - tk. 500</span
-                            ></span
-                          ><span class="irs-grid"></span
-                          ><span
-                            class="irs-bar"
-                            style="left: 4.31034%; width: 45.6897%"
-                          ></span
-                          ><span
-                            class="irs-shadow shadow-from"
-                            style="display: none"
-                          ></span
-                          ><span
-                            class="irs-shadow shadow-to"
-                            style="display: none"
-                          ></span
-                          ><span class="irs-slider from" style="left: 0%"></span
-                          ><span
-                            class="irs-slider to type_last"
-                            style="left: 45.6897%"
-                          ></span
-                        ></span>
-                        <input
-                          type="text"
-                          class="js-range-slider irs-hidden-input"
-                          value=""
-                          readonly=""
-                        />
-                        <!-- <div class="d-flex align-items-center">
-                          <div class="price_text">
-                            <p>Price :</p>
-                          </div>
-                          <div
-                            class="price_value d-flex justify-content-center"
-                          >
-                            <input
-                              type="text"
-                              class="js-input-from"
-                              id="amount"
-                              readonly
-                            />
-                            <span>to</span>
-                            <input
-                              type="text"
-                              class="js-input-to"
-                              id="amount"
-                              readonly
-                            />
-                          </div>
-                        </div> -->
-                        <div class="d-flex align-items-center">
-                          <div class="price_text">
-                            <p>Price :</p>
-                          </div>
-                          <div
-                            class="price_value d-flex justify-content-center"
-                          >
-                            <input
-                              type="text"
-                              class="js-input-from"
-                              id="amount"
-                              readonly=""
-                              value="0"
-                            />
-                            <span>to</span>
-                            <input
-                              type="text"
-                              class="js-input-to"
-                              id="amount"
-                              readonly=""
-                              value="500"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </aside>
-                  <!-- Range Slider End -->
                 </div>
               </div>
               <!-- Job Category Listing End -->
@@ -536,6 +426,3 @@
     </main>
   </div>
 </template>
-
-
-
