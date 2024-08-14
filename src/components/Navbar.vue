@@ -1,3 +1,27 @@
+<script setup>
+import { ref } from "vue";
+
+const isMenuOpen = ref(false);
+const isSubmenuOpen = ref(false);
+
+const toggleMenu = () => {
+  isMenuOpen.value = !isMenuOpen.value;
+};
+
+const closeMenu = () => {
+  isMenuOpen.value = false;
+};
+
+const toggleSubmenu = () => {
+  isSubmenuOpen.value = !isSubmenuOpen.value;
+};
+
+const reloadPage = () => {
+  window.location.reload();
+};
+</script>
+
+
 <template>
   <header>
     <!-- Header Start -->
@@ -7,14 +31,14 @@
           <div class="row align-items-center">
             <div class="col-lg-3 col-md-2">
               <!-- Logo -->
-              <div class="logo">
-                <router-link to="/">
+              <div class="logo" @click="reloadPage">
+                <a style="cursor: pointer;">
                   <img
                     style="width: 20%"
                     src="/assets/img/logo/EzpXe5xWYAAkpqo.jpg"
                     alt=""
                   />
-                </router-link>
+                </a>
               </div>
             </div>
             <div class="col-lg-9 col-md-9">
@@ -29,7 +53,7 @@
                         <router-link to="/find-jobs">Find a Jobs </router-link>
                       </li>
                       <li>
-                        <router-link>Page</router-link>
+                        <span class="cursor-pointer">Page</span>
                         <ul class="submenu">
                           <li><router-link to="/blog">Blog</router-link></li>
                           <li>
@@ -123,7 +147,7 @@
                         tabindex="-1"
                         class="slicknav_item slicknav_row"
                       >
-                        <router-link tabindex="-1">Page</router-link>
+                        <span class="cursor-pointer" tabindex="-1">Page</span>
                         <span class="slicknav_arrow">{{
                           isSubmenuOpen ? "-" : "+"
                         }}</span>
@@ -193,24 +217,6 @@
   </header>
 </template>
 
-<script setup>
-import { ref } from 'vue';
-
-const isMenuOpen = ref(false);
-const isSubmenuOpen = ref(false);
-
-const toggleMenu = () => {
-  isMenuOpen.value = !isMenuOpen.value;
-};
-
-const closeMenu = () => {
-  isMenuOpen.value = false;
-};
-
-const toggleSubmenu = () => {
-  isSubmenuOpen.value = !isSubmenuOpen.value;
-};
-</script>
 
 <style scoped>
 .slicknav_menu {

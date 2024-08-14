@@ -1,3 +1,60 @@
+<script setup>
+import { ref } from "vue";
+import axiosInstance from "../../api";
+import { useRouter } from "vue-router";
+import { useToast } from "vue-toast-notification";
+import "vue-toast-notification/dist/theme-sugar.css";
+
+const toast = useToast();
+const email = ref("");
+const password = ref("");
+const errors = ref({});
+const isSubmitting = ref(false);
+const router = useRouter();
+
+const validateForm = () => {
+  if (!email.value || !password.value) {
+    toast.error('Please fill in all fields');
+    return false;
+  }
+  return true;
+};
+
+const handleSubmit = async () => {
+  if (!validateForm()) return;
+
+  isSubmitting.value = true;
+
+  try {
+    const response = await axiosInstance.post("/login", {
+      email: email.value,
+      password: password.value,
+    });
+
+    setTimeout(() => {
+      const { session, user } = response.data;
+      toast.success("Login successful! Redirecting...");
+
+        // Save user data to localStorage
+      localStorage.setItem('loggedInUser', JSON.stringify(user));
+
+
+      // Redirect based on role
+      if (user.role === "employer") {
+        router.push("/employer-dashboard");
+      } else if (user.role === "applicant") {
+        router.push("/applicant-dashboard");
+      }
+
+      isSubmitting.value = false;
+    }, 2000);
+  } catch (error) {
+    isSubmitting.value = false;
+    toast.error(error.response?.data?.message || "An error occurred");
+  }
+};
+</script>
+
 <template>
   <div class="container my-5">
     <div class="row justify-content-center align-items-center">
@@ -57,7 +114,12 @@
                     class="btn btn-dark w-100"
                     :disabled="isSubmitting"
                   >
-                    <span v-if="isSubmitting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    <span
+                      v-if="isSubmitting"
+                      class="spinner-border spinner-border-sm"
+                      role="status"
+                      aria-hidden="true"
+                    ></span>
                     {{ isSubmitting ? "Logging in..." : "Login" }}
                   </button>
                 </form>
@@ -75,65 +137,6 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { ref } from "vue";
-import axios from "../../api";
-import { useRouter } from "vue-router";
-
-const email = ref("");
-const password = ref("");
-const errors = ref({});
-const isSubmitting = ref(false);
-const router = useRouter();
-
-const validateForm = () => {
-  errors.value = {};
-  let isValid = true;
-
-  if (!email.value) {
-    errors.value.email = "Email is required";
-    isValid = false;
-  } else if (!/\S+@\S+\.\S+/.test(email.value)) {
-    errors.value.email = "Email is invalid";
-    isValid = false;
-  }
-
-  if (!password.value) {
-    errors.value.password = "Password is required";
-    isValid = false;
-  }
-
-  return isValid;
-};
-
-const handleSubmit = async () => {
-  if (!validateForm()) return;
-
-  isSubmitting.value = true;
-
-  try {
-    const response = await axios.post('/login', { email: email.value, password: password.value });
-
-    setTimeout(() => {
-      const { session, user } = response.data;
-      alert("Login successful!");
-
-      // Redirect based on role
-      if (user.role === 'employer') {
-        router.push('/employer-dashboard');
-      } else {
-        router.push('/applicant-dashboard');
-      }
-
-      isSubmitting.value = false;
-    }, 2000);
-  } catch (error) {
-    isSubmitting.value = false;
-    alert(error.response?.data?.message || "An error occurred");
-  }
-};
-</script>
 
 <style scoped>
 /* Add spinner styles */

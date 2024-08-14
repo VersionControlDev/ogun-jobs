@@ -75,7 +75,7 @@
                   </label>
                   <label class="container"
                     >Part Time
-                    <input type="checkbox" checked="checked active" />
+                    <input type="checkbox" checked />
                     <span class="checkmark"></span>
                   </label>
                   <label class="container"
@@ -119,7 +119,7 @@
                   </label>
                   <label class="container"
                     >2-3 Years
-                    <input type="checkbox" checked="checked active" />
+                    <input type="checkbox" checked />
                     <span class="checkmark"></span>
                   </label>
                   <label class="container"
@@ -149,7 +149,7 @@
                   </label>
                   <label class="container"
                     >Today
-                    <input type="checkbox" checked="checked active" />
+                    <input type="checkbox" checked />
                     <span class="checkmark"></span>
                   </label>
                   <label class="container"
