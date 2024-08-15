@@ -5893,13 +5893,17 @@ form.search-box .input-form {
 form.search-box .input-form input {
     height: 70px;
     width: 100%;
-    color: #777777;
+    color: #fff;
     font-size: 18px;
     font-weight: 400;
     padding: 9px 33px 9px 32px;
-    border: none;
+    border: 1px solid #008600;
     border-radius: 0px;
     position: relative
+}
+
+form.search-box .input-form input:focus {
+    border: 1px solid #fff;
 }
 
 @media (max-width: 767px) {
@@ -5916,7 +5920,7 @@ form.search-box .input-form input {
 }
 
 form.search-box .input-form input::placeholder {
-    color: #616875
+    color: #fff
 }
 
 @media (max-width: 767px) {

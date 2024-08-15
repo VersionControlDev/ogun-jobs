@@ -1,12 +1,13 @@
 <script setup>
 import { ref, onMounted, computed } from "vue";
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { useToast } from "vue-toast-notification";
 
 const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
 const jobs = ref([]);
 const applications = ref([]);
 const router = useRouter();
+const route = useRoute();
 const toast = useToast();
 
 onMounted(() => {
@@ -37,7 +38,7 @@ const applyForJob = (jobId) => {
     toast.warning("Please log in to apply for this job. Redirecting...");
     setTimeout(() => {
       router.push("/login");
-    }, 4000);
+    }, 3000);
   } else if (!hasApplied(jobId)) {
     const newApplication = {
       id: Date.now(),
@@ -68,6 +69,12 @@ const getJobTitle = (jobId) => {
   const job = jobs.value.find((j) => j.id === jobId);
   return job ? job.title : "Unknown Job";
 };
+
+const getJobDetailRoute = (jobId) => {
+  return route.path.startsWith("/applicant-dashboard")
+    ? `/applicant-dashboard/job/${jobId}`
+    : `/job/${jobId}`;
+};
 </script>
 
 <template>
@@ -77,23 +84,27 @@ const getJobTitle = (jobId) => {
       :key="job.id"
       class="single-job-items mb-30 shadow rounded"
     >
-      <div class="job-items">
-        <div class="company-img">
-          <a href=""><img src="/assets/img/icon/job-list4.png" alt="" /></a>
-        </div>
-        <div class="job-tittle">
-          <h5 class="card-title">{{ job.title }}</h5>
-          <p class="">{{ job.description }}</p>
-          <p class="card-text">
-            <i class="fas fa-map-marker-alt"> &nbsp;</i>{{ job.location }}
-          </p>
-          <div class="d-flex justify-content-between">
-            <p class="card-text">₦{{ job.salary.toLocaleString() }}</p>
-            <p class="card-text">{{ job.job_type }}</p>
-            <p class="card-text">{{ job.date }}</p>
+      <router-link :to="getJobDetailRoute(job.id)">
+        <div class="job-items">
+          <div class="company-img">
+            <a href=""><img src="/assets/img/icon/job-list4.png" alt="" /></a>
+          </div>
+          <div class="job-tittle">
+            <h5 class="card-title">{{ job.title }}</h5>
+            <p style="width: 400px" class="">
+              {{ job.description.substring(0, 25) }}...
+            </p>
+            <p class="card-text">
+              <i class="fas fa-map-marker-alt"> &nbsp;</i>{{ job.location }}
+            </p>
+            <div class="d-flex justify-content-between">
+              <p class="card-text">₦{{ job.salary.toLocaleString() }}</p>
+              <p class="card-text">{{ job.job_type }}</p>
+              <p class="card-text">{{ job.date }}</p>
+            </div>
           </div>
         </div>
-      </div>
+      </router-link>
       <div class="">
         <button
           class="btn"

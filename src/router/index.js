@@ -39,12 +39,7 @@ const router = createRouter({
       path: '/blog',
       name: 'Blog',
       component: () => import('../views/Blog.vue')
-    },
-    {
-      path: '/job-details',
-      name: 'JobDetails',
-      component: () => import('../views/JobDetails.vue')
-    },
+    },   
     {
       path: '/contact',
       name: 'Contact',
@@ -59,6 +54,11 @@ const router = createRouter({
       path: '/job-listings',
       name: 'JobListing',
       component: () => import('../views/JobListing.vue')
+    },
+    {
+      path: '/job/:id',
+      name: 'PublicJobDetails',
+      component: () => import('../views/applicant/JobDetails.vue')
     },
 
     // employer dashboard
@@ -93,6 +93,11 @@ const router = createRouter({
           name: 'AllApplications',
           component: () => import('../views/applicant/AllApplications.vue')
 
+        },
+        {
+          path: 'job/:id',
+          name: 'DashboardJobDetails',
+          component: () => import('../views/applicant/JobDetails.vue')
         }
       ]
 
