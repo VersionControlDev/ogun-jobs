@@ -5881,6 +5881,15 @@ form.search-box .input-form {
     }
 }
 
+.selectF {
+    border: 1px solid black;
+    width: 100px;
+    text-align: center;
+    border-radius: 6px;
+    padding: 10px;
+    outline: none;
+}
+
 form.search-box .input-form input {
     height: 70px;
     width: 100%;
@@ -7429,6 +7438,10 @@ form.search-box .search-form a {
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg)
+}
+
+.job-listing-area .containers {
+    width: 100%;
 }
 
 .range_item p {

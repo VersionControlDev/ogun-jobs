@@ -21,7 +21,6 @@ const reloadPage = () => {
 };
 </script>
 
-
 <template>
   <header>
     <!-- Header Start -->
@@ -32,7 +31,7 @@ const reloadPage = () => {
             <div class="col-lg-3 col-md-2">
               <!-- Logo -->
               <div class="logo" @click="reloadPage">
-                <a style="cursor: pointer;">
+                <a style="cursor: pointer">
                   <img
                     style="width: 20%"
                     src="/assets/img/logo/EzpXe5xWYAAkpqo.jpg"
@@ -50,7 +49,7 @@ const reloadPage = () => {
                       <li><router-link to="/">Home</router-link></li>
                       <li><router-link to="/about">About</router-link></li>
                       <li>
-                        <router-link to="/find-jobs">Find a Jobs </router-link>
+                        <router-link to="/find-jobs">Find Job </router-link>
                       </li>
                       <li>
                         <span class="cursor-pointer">Page</span>
@@ -105,6 +104,7 @@ const reloadPage = () => {
                       <span class="slicknav_icon-bar"></span>
                     </span>
                   </button>
+
                   <ul
                     class="slicknav_nav"
                     :class="{ slicknav_hidden: !isMenuOpen }"
@@ -135,7 +135,7 @@ const reloadPage = () => {
                         @click="closeMenu"
                         role="menuitem"
                         tabindex="-1"
-                        >Find a Job</router-link
+                        >Find Job</router-link
                       >
                     </li>
                     <li class="slicknav_collapsed slicknav_parent">
@@ -205,6 +205,20 @@ const reloadPage = () => {
                         >Contact</router-link
                       >
                     </li>
+                    <li>
+                      <router-link
+                        to="/register"
+                        class="text-success"
+                        @click="closeMenu"
+                        >Register</router-link
+                      >
+                      <router-link
+                        to="/login"
+                        class="text-primary"
+                        @click="closeMenu"
+                        >Login</router-link
+                      >
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -216,7 +230,6 @@ const reloadPage = () => {
     <!-- Header End -->
   </header>
 </template>
-
 
 <style scoped>
 .slicknav_menu {
