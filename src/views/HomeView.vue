@@ -39,7 +39,7 @@ import AvailableJobs from './employer/AvailableJobs.vue';
               <!-- form -->
               <form action="#" class="search-box">
                 <div class="input-form">
-                  <input type="text" placeholder="Job Tittle or keyword" />
+                  <input type="text" placeholder="Search for jobs.." />
                 </div>
                 <div class="search-form">
                   <a href="#">Find job</a>

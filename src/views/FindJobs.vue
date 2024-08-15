@@ -211,50 +211,8 @@ import AvailableJobs from "./employer/AvailableJobs.vue";
                   <div class="job-listing-area pt-120 pb-120">
                     <div class="containers">
                       <div class="row">
-                        <!-- Right content -->
-                        <div class="col-xl-9 col-lg-9">
-                          <!-- Featured_job_start -->
-
-                          <section class="featured-job-area">
-                            <AvailableJobs />
-                            <!-- <div class="container">
-                              <div v-if="jobs.length === 0">
-                                No jobs available.
-                              </div>
-                              <div v-else>
-                                <div
-                                  v-for="job in jobs"
-                                  :key="job.id"
-                                  class="single-job-items mb-30"
-                                >
-                                  <div class="job-items">
-                                    <div class="company-img">
-                                      <a href="#">
-                                        <img :src="job.imageUrl" alt="" />
-                                      </a>
-                                    </div>
-                                    <div class="job-tittle job-tittle2">
-                                      <a href="#">
-                                        <h4>{{ job.title }}</h4>
-                                      </a>
-                                      <ul>
-                                        <li class="d-flex flex-wrap">{{ job.description }}</li><br>
-                                        <li>
-                                          <i class="fas fa-map-marker-alt"></i
-                                          >{{ job.location }}
-                                        </li>
-                                        <li>{{ job.salary }}</li>
-                                        <li>{{ job.job_type }}</li>
-                                        <li>{{ job.date }}</li>
-                                      </ul>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div> -->
-                          </section>
-                          <!-- Featured_job_end -->
-                        </div>
+                        <!-- Right content/ available jobs -->
+                        <AvailableJobs />
                       </div>
                     </div>
                   </div>
