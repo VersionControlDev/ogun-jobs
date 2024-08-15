@@ -1,7 +1,5 @@
 <script setup>
-import { useJobs } from "../components/useJob";
-
-const { jobs } = useJobs();
+import AvailableJobs from "./employer/AvailableJobs.vue";
 </script>
 
 <template>
@@ -216,8 +214,10 @@ const { jobs } = useJobs();
                         <!-- Right content -->
                         <div class="col-xl-9 col-lg-9">
                           <!-- Featured_job_start -->
+
                           <section class="featured-job-area">
-                            <div class="container">
+                            <AvailableJobs />
+                            <!-- <div class="container">
                               <div v-if="jobs.length === 0">
                                 No jobs available.
                               </div>
@@ -238,7 +238,7 @@ const { jobs } = useJobs();
                                         <h4>{{ job.title }}</h4>
                                       </a>
                                       <ul>
-                                        <li>{{ job.description }}</li>
+                                        <li class="d-flex flex-wrap">{{ job.description }}</li><br>
                                         <li>
                                           <i class="fas fa-map-marker-alt"></i
                                           >{{ job.location }}
@@ -248,15 +248,10 @@ const { jobs } = useJobs();
                                         <li>{{ job.date }}</li>
                                       </ul>
                                     </div>
-                                    <div>
-                                      <span>
-                                        
-                                      </span>
-                                    </div>
                                   </div>
                                 </div>
                               </div>
-                            </div>
+                            </div> -->
                           </section>
                           <!-- Featured_job_end -->
                         </div>

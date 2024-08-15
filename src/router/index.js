@@ -26,7 +26,7 @@ const router = createRouter({
       component: () => import('../views/Register.vue')
     },
     {
-      path: '/forgot-password', // Add this route for the Forgot Password page
+      path: '/forgot-password',
       name: 'ForgotPassword',
       component: () => import('../views/ForgotPassword.vue')
     },
@@ -72,7 +72,7 @@ const router = createRouter({
           path: 'post-jobs',
           name: 'CreateJobs',
           component: () => import('../views/employer/PostJobs.vue')
-        },      
+        },
       ]
     },
 

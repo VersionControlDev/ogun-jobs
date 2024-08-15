@@ -5,7 +5,14 @@ import { useToast } from "vue-toast-notification";
 const toast = useToast();
 const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
 const showJobForm = ref(false);
-const jobForm = ref({ title: "", description: "", location: "", salary: "", job_type:"", date: "" });
+const jobForm = ref({
+  title: "",
+  description: "",
+  location: "",
+  salary: "",
+  job_type: "",
+  date: "",
+});
 const jobs = ref([]);
 const applications = ref([]);
 const selectedJob = ref(null);
@@ -78,7 +85,13 @@ const cancelEdit = () => {
 const resetForm = () => {
   showJobForm.value = false;
   editingJob.value = null;
-  jobForm.value = { title: "", description: "", location: "", salary: "", date: "" };
+  jobForm.value = {
+    title: "",
+    description: "",
+    location: "",
+    salary: "",
+    date: "",
+  };
 };
 
 const postedJobs = computed(() => {
@@ -112,7 +125,7 @@ const selectedJobApplicants = computed(() => {
       Post New Job
     </button>
 
-    <div v-if="showJobForm" class="card mb-3">
+    <div v-if="showJobForm" class="card mb-3 shadow rounded">
       <div class="card-body">
         <h5 class="card-title">
           {{ editingJob ? "Edit Job" : "Post New Job" }}
@@ -143,6 +156,7 @@ const selectedJobApplicants = computed(() => {
               <option value="Lagos">Lagos</option>
               <option value="Ogun">Ogun</option>
               <option value="Osun">Osun</option>
+              <option value="Osun">Anywhere</option>
             </select>
           </div>
           <div class="mb-3">
@@ -158,9 +172,11 @@ const selectedJobApplicants = computed(() => {
           <div>
             <label for="title" class="form-label">Job Type</label>
             <select class="form-control mb-3" v-model="jobForm.job_type">
-            <option value="Full Time">Full Time</option>
-            <option value="Part Time">Part Time</option>
-          </select>
+              <option value="Full Time">Full Time</option>
+              <option value="Part Time">Part Time</option>
+              <option value="Part Time">Remote</option>
+              <option value="Part Time">Freelance</option>
+            </select>
           </div>
           <div class="mb-3">
             <label for="title" class="form-label">Job Date</label>
@@ -187,14 +203,25 @@ const selectedJobApplicants = computed(() => {
     </div>
 
     <h3>Your Posted Jobs</h3>
-    <div v-for="job in postedJobs" :key="job.id" class="card mb-3">
-      <div class="card-body">
-        <h5 class="card-title">{{ job.title }}</h5>
-        <p class="card-text">{{ job.description }}</p>
-        <p class="card-text">{{ job.location }}</p>
-        <p class="card-text">{{ job.salary }}</p>
-        <p class="card-text">{{ job.job_type }}</p>
-        <p class="card-text">{{ job.date }}</p>
+    <div v-for="job in postedJobs" :key="job.id" class="single-job-items mb-30">
+      <div class="job-items">
+        <div class="company-img">
+          <a href=""><img src="/assets/img/icon/job-list4.png" alt="" /></a>
+        </div>
+        <div class="job-tittle">
+          <h5 class="card-title">{{ job.title }}</h5>
+          <p class="">{{ job.description }}</p>
+          <p class="card-text">
+            <i class="fas fa-map-marker-alt"> &nbsp;</i>{{ job.location }}
+          </p>
+          <div class="d-flex justify-content-between">
+            <p class="card-text">₦{{ job.salary.toLocaleString() }}</p>
+            <p class="card-text">{{ job.job_type }}</p>
+            <p class="card-text">{{ job.date }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="p-2">
         <button class="btn btn-info me-2" @click="viewApplicants(job.id)">
           View Applicants ({{ getApplicantCount(job.id) }})
         </button>

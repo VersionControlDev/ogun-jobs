@@ -45,17 +45,34 @@ const appliedJobs = computed(() => {
       You haven't applied to any jobs yet.
     </div>
     <div v-else>
-      <div v-for="job in appliedJobs" :key="job.id" class="card mb-3">
-        <div class="card-body">
-          <h5 class="card-title">{{ job.title }}</h5>
-          <p class="card-text">{{ job.description }}</p>
-          <p class="card-text">{{ job.location }}</p>
-          <p class="card-text">{{ job.salary }}</p>
-          <!-- <p class="card-text">{{ job.date }}</p> -->
-          <p class="text-muted">
-            Applied on: {{ new Date(job.appliedAt).toLocaleDateString() }}
-          </p>
+      <div
+        v-for="job in appliedJobs"
+        :key="job.id"
+        class="single-job-items mb-30 shadow rounded"
+      >
+        <div class="job-items">
+          <div class="company-img">
+            <a href="#">
+              <img :src="job.imageUrl" alt="" />
+            </a>
+          </div>
+          <div class="job-tittle job-tittle2">
+            <a href="#">
+              <h4>{{ job.title }}</h4>
+            </a>
+            <ul>
+              <li class="d-flex flex-wrap">{{ job.description }}</li>
+              <br />
+              <li><i class="fas fa-map-marker-alt"></i>{{ job.location }}</li>
+              <li>{{ job.salary }}</li>
+              <li>{{ job.job_type }}</li>
+              <li>{{ job.date }}</li>
+            </ul>
+          </div>
         </div>
+        <p class="text-muted">
+          Applied on: {{ new Date(job.appliedAt).toLocaleDateString() }}
+        </p>
       </div>
     </div>
   </div>
