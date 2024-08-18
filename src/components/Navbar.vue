@@ -1,266 +1,84 @@
 <script setup>
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 
+const router = useRouter();
 const isMenuOpen = ref(false);
-const isSubmenuOpen = ref(false);
 
-const toggleMenu = () => {
-  isMenuOpen.value = !isMenuOpen.value;
-};
+const isSubmenuOpen = ref(false);
 
 const closeMenu = () => {
   isMenuOpen.value = false;
-};
-
-const toggleSubmenu = () => {
-  isSubmenuOpen.value = !isSubmenuOpen.value;
-};
-
-const reloadPage = () => {
-  window.location.reload();
+  isSubmenuOpen.value = false;
 };
 </script>
 
 <template>
-  <header>
-    <!-- Header Start -->
-    <div class="header-area header-transparrent">
-      <div class="headder-top header-sticky">
-        <div class="container">
-          <div class="row align-items-center">
-            <div class="col-lg-3 col-md-2">
-              <!-- Logo -->
-              <div class="logo" @click="reloadPage">
-                <a style="cursor: pointer">
-                  <img
-                    style="width: 20%"
-                    src="/assets/img/logo/EzpXe5xWYAAkpqo.jpg"
-                    alt=""
-                  />
-                </a>
-              </div>
-            </div>
-            <div class="col-lg-9 col-md-9">
-              <div class="menu-wrapper">
-                <!-- Main-menu -->
-                <div class="main-menu">
-                  <nav class="d-none d-lg-block">
-                    <ul id="navigation">
-                      <li><router-link to="/">Home</router-link></li>
-                      <li><router-link to="/about">About</router-link></li>
-                      <li>
-                        <router-link to="/find-jobs">Find Job </router-link>
-                      </li>
-                      <li>
-                        <span class="cursor-pointer">Page</span>
-                        <ul class="submenu">
-                          <li><router-link to="/blog">Blog</router-link></li>
-                          <li>
-                            <router-link to="/single-blog"
-                              >Blog Details</router-link
-                            >
-                          </li>
-                          <li>
-                            <router-link to="/elements">Elements</router-link>
-                          </li>
-                          <li>
-                            <router-link to="/job-details"
-                              >Job Details</router-link
-                            >
-                          </li>
-                        </ul>
-                      </li>
-                      <li><router-link to="/contact">Contact</router-link></li>
-                    </ul>
-                  </nav>
-                </div>
-                <!-- Header-btn -->
-                <div class="header-btn d-none f-right d-lg-block">
-                  <router-link to="/register" class="btn head-btn1"
-                    >Register</router-link
-                  >
-                  <router-link to="/login" class="btn head-btn2"
-                    >Login</router-link
-                  >
-                </div>
-              </div>
-            </div>
-            <!-- Mobile Menu -->
-            <div class="col-12">
-              <div class="mobile_menu d-block d-lg-none">
-                <div class="slicknav_menu">
-                  <button
-                    @click="toggleMenu"
-                    aria-haspopup="true"
-                    role="button"
-                    tabindex="0"
-                    class="slicknav_btn"
-                    :class="{ slicknav_collapsed: !isMenuOpen }"
-                  >
-                    <span class="slicknav_menutxt">MENU</span>
-                    <span class="slicknav_icon">
-                      <span class="slicknav_icon-bar"></span>
-                      <span class="slicknav_icon-bar"></span>
-                      <span class="slicknav_icon-bar"></span>
-                    </span>
-                  </button>
-
-                  <ul
-                    class="slicknav_nav"
-                    :class="{ slicknav_hidden: !isMenuOpen }"
-                    aria-hidden="true"
-                    role="menu"
-                  >
-                    <li>
-                      <router-link
-                        to="/"
-                        @click="closeMenu"
-                        role="menuitem"
-                        tabindex="-1"
-                        >Home</router-link
-                      >
-                    </li>
-                    <li>
-                      <router-link
-                        to="/about"
-                        @click="closeMenu"
-                        role="menuitem"
-                        tabindex="-1"
-                        >About</router-link
-                      >
-                    </li>
-                    <li>
-                      <router-link
-                        to="/find-jobs"
-                        @click="closeMenu"
-                        role="menuitem"
-                        tabindex="-1"
-                        >Find Job</router-link
-                      >
-                    </li>
-                    <li class="slicknav_collapsed slicknav_parent">
-                      <router-link
-                        to="/"
-                        @click="toggleSubmenu"
-                        role="menuitem"
-                        aria-haspopup="true"
-                        tabindex="-1"
-                        class="slicknav_item slicknav_row"
-                      >
-                        <span class="cursor-pointer" tabindex="-1">Page</span>
-                        <span class="slicknav_arrow">{{
-                          isSubmenuOpen ? "-" : "+"
-                        }}</span>
-                      </router-link>
-                      <ul
-                        class="submenu"
-                        :class="{ slicknav_hidden: !isSubmenuOpen }"
-                        role="menu"
-                        aria-hidden="true"
-                      >
-                        <li>
-                          <router-link
-                            to="/blog"
-                            @click="closeMenu"
-                            role="menuitem"
-                            tabindex="-1"
-                            >Blog</router-link
-                          >
-                        </li>
-                        <li>
-                          <router-link
-                            to="/blog-details"
-                            @click="closeMenu"
-                            role="menuitem"
-                            tabindex="-1"
-                            >Blog Details</router-link
-                          >
-                        </li>
-                        <li>
-                          <router-link
-                            to="/elements"
-                            @click="closeMenu"
-                            role="menuitem"
-                            tabindex="-1"
-                            >Elements</router-link
-                          >
-                        </li>
-                        <li>
-                          <router-link
-                            to="/job-details"
-                            @click="closeMenu"
-                            role="menuitem"
-                            tabindex="-1"
-                            >Job Details</router-link
-                          >
-                        </li>
-                      </ul>
-                    </li>
-                    <li>
-                      <router-link
-                        to="/contact"
-                        @click="closeMenu"
-                        role="menuitem"
-                        tabindex="-1"
-                        >Contact</router-link
-                      >
-                    </li>
-                    <li>
-                      <router-link
-                        to="/register"
-                        class="text-success"
-                        @click="closeMenu"
-                        >Register</router-link
-                      >
-                      <router-link
-                        to="/login"
-                        class="text-primary"
-                        @click="closeMenu"
-                        >Login</router-link
-                      >
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <div class="container-fluid">
+      <router-link
+        @click="closeMenu"
+        class="navbar-brand"
+        aria-current="page"
+        to="/"
+      >
+        <img
+          style="width: 130px"
+          src="/assets/img/logo/ogun_state_logo.svg"
+          alt="Logo"
+      /></router-link>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div
+        class="collapse navbar-collapse justify-content-end"
+        id="navbarSupportedContent"
+      >
+        <ul class="navbar-nav me-5 mb-2 mb-lg-0">
+          <li class="nav-item">
+            <router-link
+              @click="closeMenu"
+              class="nav-link active"
+              aria-current="page"
+              to="/"
+              >Home</router-link
+            >
+          </li>
+          <li class="nav-item">
+            <router-link @click="closeMenu" class="nav-link" to="/about"
+              >About</router-link
+            >
+          </li>
+          <li class="nav-item">
+            <router-link @click="closeMenu" class="nav-link" to="/job-listings"
+              >Find Jobs</router-link
+            >
+          </li>
+          <li class="nav-item">
+            <router-link @click="closeMenu" class="nav-link" to="/contact"
+              >Contact</router-link
+            >
+          </li>
+        </ul>
+        <ul class="d-flex">
+          <li>
+            <router-link
+              @click="closeMenu"
+              to="/login"
+              class="btn btn-outline-success"
+              >Login</router-link
+            >
+          </li>
+        </ul>
       </div>
     </div>
-    <!-- Header End -->
-  </header>
+  </nav>
 </template>
-
-<style scoped>
-.slicknav_menu {
-  position: relative;
-}
-
-.slicknav_btn {
-  display: flex;
-  align-items: center;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-}
-
-.slicknav_nav {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.slicknav_hidden {
-  display: none;
-}
-
-.submenu {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.slicknav_arrow {
-  margin-left: 5px;
-}
-</style>

@@ -1,3 +1,6 @@
+<script setup>
+
+</script>
 <template>
         <!-- Footer Start-->
         <div class="footer-area footer-bg footer-padding">
@@ -135,10 +138,6 @@
         </div>
       </div>
 </template>
-
-<script setup>
-
-</script>
 
 <style>
 

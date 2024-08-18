@@ -131,114 +131,120 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-  <div class="container my-5">
+  <div class="container my-5 form_data">
     <div class="row justify-content-center">
       <div class="col-md-8">
         <div class="card shadow">
-          <div class="card-header text-center bg-dark">
+          <div class="card-header text-center bg-success">
             <h3 class="text-white">Register</h3>
           </div>
           <div class="card-body p-4">
             <div class="d-flex justify-content-center mb-4">
               <button
-                class="btn btn-outline-dark me-2 toggle-button p-4"
+                class="btn btn-outline-success me-2 toggle-button"
                 :class="{ active: isEmployer }"
                 @click="isEmployer = true"
               >
                 As Employer
               </button>
               <button
-                class="btn btn-outline-dark toggle-button"
+                class="btn btn-outline-success toggle-button"
                 :class="{ active: !isEmployer }"
                 @click="isEmployer = false"
               >
-               As Applicant
+                As Applicant
               </button>
             </div>
             <form @submit.prevent="handleSubmit">
               <div v-if="isEmployer">
-                <div class="form-group mb-3">
-                  <label for="companyName">Company Name</label>
+                <div class="row">
+                  <div class="col-md-6 form-group mb-3">
+                    <label for="companyName">Company Name</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="companyName"
+                      v-model="companyName"
+                      placeholder="Enter company name"
+                    />
+                    <div v-if="errors.companyName" class="text-danger mt-2">
+                      {{ errors.companyName }}
+                    </div>
+                  </div>
+                  <div class="col-md-6 form-group mb-3">
+                    <label for="companyAddress">Company Address</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="companyAddress"
+                      v-model="companyAddress"
+                      placeholder="Enter company address"
+                    />
+                    <div v-if="errors.companyAddress" class="text-danger mt-2">
+                      {{ errors.companyAddress }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 form-group mb-3">
+                  <label for="fullName">Full Name</label>
                   <input
                     type="text"
                     class="form-control"
-                    id="companyName"
-                    v-model="companyName"
-                    placeholder="Enter company name"
+                    id="fullName"
+                    v-model="fullName"
+                    placeholder="Enter full name"
                   />
-                  <div v-if="errors.companyName" class="text-danger mt-2">
-                    {{ errors.companyName }}
+                  <div v-if="errors.fullName" class="text-danger mt-2">
+                    {{ errors.fullName }}
                   </div>
                 </div>
-                <div class="form-group mb-3">
-                  <label for="companyAddress">Company Address</label>
+                <div class="col-md-6 form-group mb-3">
+                  <label for="email">Email Address</label>
                   <input
-                    type="text"
+                    type="email"
                     class="form-control"
-                    id="companyAddress"
-                    v-model="companyAddress"
-                    placeholder="Enter company address"
+                    id="email"
+                    v-model="email"
+                    placeholder="Enter email"
                   />
-                  <div v-if="errors.companyAddress" class="text-danger mt-2">
-                    {{ errors.companyAddress }}
+                  <div v-if="errors.email" class="text-danger mt-2">
+                    {{ errors.email }}
                   </div>
                 </div>
               </div>
-              <div class="form-group mb-3">
-                <label for="fullName">Full Name</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="fullName"
-                  v-model="fullName"
-                  placeholder="Enter full name"
-                />
-                <div v-if="errors.fullName" class="text-danger mt-2">
-                  {{ errors.fullName }}
+              <div class="row">
+                <div class="col-md-6 form-group mb-3">
+                  <label for="password">Password</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="password"
+                    v-model="password"
+                    placeholder="Enter password"
+                  />
+                  <div v-if="errors.password" class="text-danger mt-2">
+                    {{ errors.password }}
+                  </div>
                 </div>
-              </div>
-              <div class="form-group mb-3">
-                <label for="email">Email Address</label>
-                <input
-                  type="email"
-                  class="form-control"
-                  id="email"
-                  v-model="email"
-                  placeholder="Enter email"
-                />
-                <div v-if="errors.email" class="text-danger mt-2">
-                  {{ errors.email }}
-                </div>
-              </div>
-              <div class="form-group mb-3">
-                <label for="password">Password</label>
-                <input
-                  type="password"
-                  class="form-control"
-                  id="password"
-                  v-model="password"
-                  placeholder="Enter password"
-                />
-                <div v-if="errors.password" class="text-danger mt-2">
-                  {{ errors.password }}
-                </div>
-              </div>
-              <div class="form-group mb-4">
-                <label for="confirmPassword">Confirm Password</label>
-                <input
-                  type="password"
-                  class="form-control"
-                  id="confirmPassword"
-                  v-model="confirmPassword"
-                  placeholder="Confirm password"
-                />
-                <div v-if="errors.confirmPassword" class="text-danger mt-2">
-                  {{ errors.confirmPassword }}
+                <div class="col-md-6 form-group mb-4">
+                  <label for="confirmPassword">Confirm Password</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="confirmPassword"
+                    v-model="confirmPassword"
+                    placeholder="Confirm password"
+                  />
+                  <div v-if="errors.confirmPassword" class="text-danger mt-2">
+                    {{ errors.confirmPassword }}
+                  </div>
                 </div>
               </div>
               <button
                 type="submit"
-                class="btn btn-dark w-100"
+                class="btn bg-success w-100"
                 :disabled="isSubmitting"
               >
                 <span
@@ -260,56 +266,3 @@ const handleSubmit = async () => {
     </div>
   </div>
 </template>
-
-<style scoped>
-.container {
-  max-width: 900px;
-}
-
-.card {
-  border-radius: 20px;
-}
-
-.card-header {
-  border-bottom: none;
-  padding: 1.5rem;
-}
-
-.card-body {
-  padding: 2rem;
-}
-
-.toggle-button {
-  font-size: 1.2rem;
-  padding: 0.5rem 2rem;
-  border-radius: 6px;
-}
-
-button.active {
-  background-color: #343a40;
-  color: white;
-}
-
-input.form-control {
-  border: 1px solid #ced4da;
-  padding: 0.75rem;
-  font-size: 1rem;
-}
-
-button {
-  font-size: 1.1rem;
-}
-
-.card-footer {
-  background-color: #f8f9fa;
-  padding: 1rem;
-}
-
-.card-footer a {
-  font-weight: 500;
-}
-
-.d-flex .text-muted {
-  font-size: 0.9rem;
-}
-</style>

@@ -1,13 +1,13 @@
 <template>
   <div class="contact">
         <!-- Hero Area Start-->
-        <div class="slider-area ">
-        <div class="single-slider section-overly slider-height2 d-flex align-items-center"
-            data-background="assets/img/hero/about.jpg">
-            <div class="container">
+        <div class="slider-area">
+        <div class="single-slider slider-height d-flex align-items-center"
+            >
+            <div class="container d-flex justify-content-center align-items-center">
                 <div class="row">
                     <div class="col-xl-12">
-                        <div class="hero-cap text-center">
+                        <div class="hero-cap ">
                             <h2>Contact us</h2>
                         </div>
                     </div>
@@ -28,8 +28,8 @@
                     <h2 class="contact-title">Get in Touch</h2>
                 </div>
                 <div class="col-lg-8">
-                    <form class="form-contact contact_form" action="contact_process.php" method="post" id="contactForm"
-                        novalidate="novalidate">
+                    <form class="form-contact contact_form" id="contactForm"
+                       >
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">

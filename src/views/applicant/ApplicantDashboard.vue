@@ -2,9 +2,7 @@
 import { ref, computed, onMounted } from "vue";
 import { useRouter, useRoute, RouterLink } from "vue-router";
 import { useDisplay } from "vuetify";
-// import Search from '@/components/SearchEvent.vue'
-// import logo from '../../assets/logo.png'
-// import LogoutUser from '@/components/LogoutUser.vue'
+import logo from "../../../assets/img/logo/ogun_state_logo.svg";
 
 const route = useRoute();
 const router = useRouter();
@@ -23,12 +21,17 @@ const menuItems = [
   {
     title: "View Available Jobs",
     route: "/applicant-dashboard/all-jobs",
-    icon: "fas fa-unlock-alt",
+    icon: "fas fa-briefcase",
   },
   {
     title: "All Applications",
     route: "/applicant-dashboard/all-applications",
-    icon: "fas fa-bullhorn",
+    icon: "fas fa-file-alt",
+  },
+  {
+    title: "My Profile",
+    route: "/applicant-dashboard/submitted-applicant-details",
+    icon: "fas fa-user",
   },
 ];
 
@@ -55,7 +58,7 @@ const isActive = (path) => {
   return (
     route.path === path ||
     (path === "/employer-dashboard" &&
-      route.path === "/employer-dashboard/all-applications")
+      route.path === "/employer-dashboard/all-jobs")
   );
 };
 
@@ -65,21 +68,15 @@ const logOut = () => {
     window.location.reload();
   });
 };
-
 </script>
 
 <template>
   <v-card>
     <v-layout>
       <v-navigation-drawer v-model="sidebarMenu" :mini-variant="mini">
-        <RouterLink to="/">
-          <div class="px-2 d-flex justify-center items-center my-5">
-            <!-- <img :src="logo" alt="" /> -->
-            <p class="text-2xl font-bold capitalize">
-              Ogun<span class="text-primary">Jobs</span>
-            </p>
-          </div>
-        </RouterLink>
+        <div class="px-2 d-flex justify-center items-center my-5">
+          <img :src="logo" alt="" />
+        </div>
 
         <v-list density="compact" nav>
           <v-list-item
@@ -99,12 +96,12 @@ const logOut = () => {
         </v-list>
       </v-navigation-drawer>
 
-      <v-app-bar color="primary" prominent>
+      <v-app-bar class="bg-success" prominent>
         <v-app-bar-nav-icon
           variant="text"
           @click.stop="sidebarMenu = !sidebarMenu"
         ></v-app-bar-nav-icon>
-        <!-- <Search /> -->
+
         <v-spacer></v-spacer>
         <v-btn icon>
           <v-icon>fa-bell</v-icon>

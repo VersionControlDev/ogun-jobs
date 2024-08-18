@@ -53,19 +53,25 @@ const applyForJob = () => {
     // Optionally, you can show a success message or redirect the user
   }
 };
+
+const formatNumber = (num) => {
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
 </script>
 
 <template>
-  <div v-if="job" class="container p-5 rounded border m-3">
+  <div v-if="job" class="container p-5 rounded border form_data">
     <h2>{{ job.title }}</h2>
     <p><strong>Company: </strong> {{ job.company }}</p>
     <p>
       <strong>Location: </strong><i class="fas fa-map-marker-alt">&nbsp;</i
       >{{ job.location }}
     </p>
+    <p class="card-text">Company: {{ job.company }}</p>
+
     <div class="d-flex justify-content-between">
       <p class="card-text">
-        <strong>Salary: </strong>₦{{ job.salary.toLocaleString() }}
+        <strong>Salary: </strong>₦{{ formatNumber(job.salary) }}
       </p>
       <p class="card-text"><strong>Job Type: </strong>{{ job.job_type }}</p>
       <p class="card-text"><strong>Date: </strong>{{ job.date }}</p>
@@ -80,7 +86,7 @@ const applyForJob = () => {
     </ul>
     <button
       class="btn"
-      :class="hasApplied ? 'btn-secondary' : 'btn-primary'"
+      :class="hasApplied ? 'btn-secondary' : 'btn-outline-success'"
       @click="applyForJob"
       :disabled="hasApplied"
     >

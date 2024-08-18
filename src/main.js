@@ -1,5 +1,6 @@
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
+import "bootstrap/dist/css/bootstrap.min.css"
 import '@fortawesome/fontawesome-free/css/all.css';
 
 import ToastPlugin from 'vue-toast-notification';
@@ -28,3 +29,4 @@ app.use(vuetify);
 
 
 app.mount('#app');
+import "bootstrap/dist/js/bootstrap.js"

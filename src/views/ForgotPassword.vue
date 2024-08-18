@@ -1,9 +1,9 @@
 <template>
-    <div class="container my-5">
+    <div class="container my-5 form_data">
       <div class="row justify-content-center">
         <div class="col-md-6">
           <div class="card shadow-lg">
-            <div class="card-header text-center bg-dark text-light">
+            <div class="card-header text-center bg-success text-light">
               <h3 class="text-white">Forgot Password</h3>
             </div>
             <div class="card-body p-4">
@@ -12,7 +12,7 @@
                   <label for="email">Enter your email address</label>
                   <input
                     type="email"
-                    class="form-control rounded-pill"
+                    class="form-control"
                     id="email"
                     v-model="email"
                     placeholder="Enter email"
@@ -21,7 +21,7 @@
                 </div>
                 <button
                   type="submit"
-                  class="btn btn-dark w-100 rounded-pill"
+                  class="btn bg-success w-100"
                   :disabled="isSubmitting"
                 >
                   {{ isSubmitting ? 'Processing...' : 'Reset Password' }}

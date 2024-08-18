@@ -2,8 +2,7 @@
 import { ref, computed, onMounted } from "vue";
 import { useRouter, useRoute, RouterLink } from "vue-router";
 import { useDisplay } from "vuetify";
-// import Search from '@/components/SearchEvent.vue'
-// import LogoutUser from '@/components/LogoutUser.vue'
+import logo from "../../../assets/img/logo/ogun_state_logo.svg";
 
 const route = useRoute();
 const router = useRouter();
@@ -15,14 +14,24 @@ const toggleMini = ref(false);
 const user = ref({});
 
 onMounted(() => {
-  user.value = JSON.parse(localStorage.getItem("user") || "{}");
+  user.value = JSON.parse(localStorage.getItem("loggedInUser") || "{}");
 });
 
 const menuItems = [
   {
-    title: "Create Jobs",
+    title: "Post Jobs",
     route: "/employer-dashboard/post-jobs",
-    icon: "fas fa-code",
+    icon: "fas fa-plus-circle",
+  },
+  {
+    title: "Posted Jobs",
+    route: "/employer-dashboard/posted-jobs",
+    icon: "fas fa-list",
+  },
+  {
+    title: "Applicants",
+    route: "/employer-dashboard/applicants",
+    icon: "fas fa-users",
   },
 ];
 
@@ -49,7 +58,7 @@ const isActive = (path) => {
   return (
     route.path === path ||
     (path === "/employer-dashboard" &&
-      route.path === "/employer-dashboard/create-jobs")
+      route.path === "/employer-dashboard/post-jobs")
   );
 };
 
@@ -59,20 +68,15 @@ const logOut = () => {
     window.location.reload();
   });
 };
-
 </script>
 
 <template>
   <v-card>
     <v-layout>
       <v-navigation-drawer v-model="sidebarMenu" :mini-variant="mini">
-        <!-- <RouterLink to="/">
-          <div class="px-2 d-flex justify-center items-center my-5">
-            <p class="">
-              Ogun<span class="text-primary">Jobs</span>
-            </p>
-          </div>
-        </RouterLink> -->
+        <div class="px-2 d-flex justify-center items-center my-5">
+          <img :src="logo" alt="" />
+        </div>
 
         <v-list density="compact" nav>
           <v-list-item
@@ -92,12 +96,15 @@ const logOut = () => {
         </v-list>
       </v-navigation-drawer>
 
-      <v-app-bar color="primary" prominent>
+      <v-app-bar class="bg-success" prominent>
         <v-app-bar-nav-icon
           variant="text"
           @click.stop="sidebarMenu = !sidebarMenu"
         ></v-app-bar-nav-icon>
-        <!-- <Search /> -->
+        <h4>
+          Welcome <span class="text-white">{{ user.name }}</span>
+        </h4>
+
         <v-spacer></v-spacer>
         <v-btn icon>
           <v-icon>fa-bell</v-icon>
