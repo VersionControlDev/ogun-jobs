@@ -3,8 +3,7 @@
     <!-- Hero Area Start-->
     <div class="slider-area">
       <div
-        class="single-slider section-overlay slider-height2 d-flex align-items-center"
-        data-background="assets/img/hero/about.jpg"
+        class="single-slider section-overlay slider-height d-flex align-items-center"    
       >
         <div class="container">
           <div class="row">

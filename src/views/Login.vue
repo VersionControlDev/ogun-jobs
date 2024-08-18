@@ -38,7 +38,6 @@ const handleSubmit = async () => {
         // Save user data to localStorage
       localStorage.setItem('loggedInUser', JSON.stringify(user));
 
-
       // Redirect based on role
       if (user.role === "employer") {
         router.push("/employer-dashboard");
@@ -56,7 +55,7 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-  <div class="container my-5">
+  <div class="container form_data">
     <div class="row justify-content-center align-items-center">
       <div class="col-md-10">
         <div class="row g-0 shadow-lg">
@@ -71,7 +70,7 @@ const handleSubmit = async () => {
           <!-- Form Column -->
           <div class="col-md-6">
             <div class="card h-100 border-0">
-              <div class="card-header text-center bg-dark">
+              <div class="card-header text-center bg-success">
                 <h3 class="text-white">Login</h3>
               </div>
               <div class="card-body p-4">
@@ -111,7 +110,7 @@ const handleSubmit = async () => {
                   </div>
                   <button
                     type="submit"
-                    class="btn btn-dark w-100"
+                    class="btn bg-success w-100"
                     :disabled="isSubmitting"
                   >
                     <span
@@ -199,4 +198,6 @@ button {
 .d-flex .text-muted {
   font-size: 0.9rem;
 }
+
+
 </style>

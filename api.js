@@ -25,7 +25,7 @@ mock.onPost('/login').reply((config) => {
         const session = { token: 'mockToken' };
         const user = {
             id: 1,
-            name: userRoles[email] === 'employer' ? 'Employer User' : 'Applicant User',
+            name: userRoles[email] === 'employer' ? 'Employer' : 'Applicant',
             photo: 'sam.jpg',
             role: userRoles[email]
         };

@@ -11,9 +11,9 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/find-jobs',
-      name: 'find-jobs',
-      component: () => import('../views/FindJobs.vue')
+      path: '/job-listings',
+      name: 'JobListings',
+      component: () => import('../views/JobListings.vue')
     },
     {
       path: '/login',
@@ -39,26 +39,22 @@ const router = createRouter({
       path: '/blog',
       name: 'Blog',
       component: () => import('../views/Blog.vue')
-    },   
+    },
     {
       path: '/contact',
       name: 'Contact',
       component: () => import('../views/Contact.vue')
-    },
-    {
-      path: '/elements',
-      name: 'Elements',
-      component: () => import('../views/Elements.vue')
-    },
-    {
-      path: '/job-listings',
-      name: 'JobListing',
-      component: () => import('../views/JobListing.vue')
-    },
+    },   
     {
       path: '/job/:id',
       name: 'PublicJobDetails',
       component: () => import('../views/applicant/JobDetails.vue')
+    },
+    {
+      path: '/apply',
+      name: 'Apply',
+      component: () => import('../components/JobApplicationForm.vue')
+
     },
 
     // employer dashboard
@@ -72,6 +68,16 @@ const router = createRouter({
           path: 'post-jobs',
           name: 'CreateJobs',
           component: () => import('../views/employer/PostJobs.vue')
+        },
+        {
+          path: 'posted-jobs',
+          name: 'PostedJobs',
+          component: () => import('../views/employer/PostedJobs.vue')
+        },
+        {
+          path: 'applicants',
+          name: 'Apllicants',
+          component: () => import('../views/employer/Applicants.vue')
         },
       ]
     },
@@ -98,6 +104,11 @@ const router = createRouter({
           path: 'job/:id',
           name: 'DashboardJobDetails',
           component: () => import('../views/applicant/JobDetails.vue')
+        },
+        {
+          path: 'submitted-applicant-details',
+          name: 'SubmittedApplicantDetails',
+          component: () => import('../views/SubmittedApplicantDetails.vue')
         }
       ]
 
