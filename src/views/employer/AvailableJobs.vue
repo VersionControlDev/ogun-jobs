@@ -15,6 +15,7 @@ const selectedCategory = ref("");
 const selectedTypes = ref([]);
 const selectedLocation = ref("");
 const searchQuery = ref("");
+const sortBy = ref();
 
 onMounted(() => {
   loadJobs();
@@ -37,7 +38,7 @@ const loadApplications = () => {
 
 // Apply filters
 const filteredJobs = computed(() => {
-  return jobs.value.filter((job) => {
+  let filtered = jobs.value.filter((job) => {
     return (
       (!selectedCategory.value || job.category === selectedCategory.value) &&
       (selectedTypes.value.length === 0 ||
@@ -48,6 +49,20 @@ const filteredJobs = computed(() => {
         job.company.toLowerCase().includes(searchQuery.value.toLowerCase()))
     );
   });
+
+  // Apply sorting
+  if (sortBy.value) {
+    filtered.sort((a, b) => {
+      if (sortBy.value === "date") {
+        return new Date(b.date) - new Date(a.date);
+      } else if (sortBy.value === "salary") {
+        return b.salary - a.salary;
+      }
+      return 0;
+    });
+  }
+
+  return filtered;
 });
 
 const applyForJob = (jobId) => {
@@ -85,12 +100,17 @@ const getJobDetailRoute = (jobId) => {
 const formatNumber = (num) => {
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
+
+const performSearch = () => {
+  // This function will trigger the search manually
+  // You can leave it empty or add any additional logic if needed
+};
 </script>
 
 <template>
   <div>
     <!-- Job List Area Start -->
-    <div class="job-listing-area pt-120 pb-120">
+    <div class="job-listing-area pt-60 pb-120">
       <div class="container">
         <h2>List of Available Jobs</h2>
         <div class="row">
@@ -200,8 +220,6 @@ const formatNumber = (num) => {
                     <option value="Anywhere">Anywhere</option>
                   </select>
                 </div>
-
-                <!-- select-Categories End -->
               </div>
             </div>
             <!-- Job Category Listing End -->
@@ -215,16 +233,21 @@ const formatNumber = (num) => {
                 <div class="row">
                   <div class="col-lg-12">
                     <div class="count-job mb-35">
-                      <span>39, 782 Jobs found</span>
-                      <!-- Select job items start -->
+                      <span
+                        >( {{ formatNumber(filteredJobs.length) }} ) Jobs
+                        found</span
+                      >
                       <div class="select-job-items">
-                        <span>Sort by</span>
-                        <select name="select">
-                          <option value="">None</option>
-                          <option value="">job list</option>
-                          <option value="">job list</option>
-                          <option value="">job list</option>
-                        </select>
+                        <div
+                          class="d-flex justify-content-center align-items-center"
+                        >
+                          <span>Sort</span>
+                          <select v-model="sortBy" class="form-control">
+                            <option value="">None</option>
+                            <option value="date">Date Posted</option>
+                            <option value="salary">Salary</option>
+                          </select>
+                        </div>
                       </div>
                       <!--  Select job items End-->
                     </div>
@@ -232,6 +255,21 @@ const formatNumber = (num) => {
                 </div>
                 <!-- Count of Job list End -->
                 <!-- Job List Area Start -->
+                <div class="input-group">
+                  <input
+                    type="text"
+                    v-model="searchQuery"
+                    placeholder="Search by job title or company"
+                    class="form-control"
+                  />
+                  <button
+                    class="btn btn-outline-success"
+                    type="button"
+                    @click="performSearch"
+                  >
+                    <i class="fas fa-search"></i>
+                  </button>
+                </div>
                 <div class="job-listing-area pt-120 pb-120">
                   <div class="containers">
                     <div class="row">

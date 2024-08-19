@@ -67,7 +67,6 @@ const formatNumber = (num) => {
       <strong>Location: </strong><i class="fas fa-map-marker-alt">&nbsp;</i
       >{{ job.location }}
     </p>
-    <p class="card-text">Company: {{ job.company }}</p>
 
     <div class="d-flex justify-content-between">
       <p class="card-text">

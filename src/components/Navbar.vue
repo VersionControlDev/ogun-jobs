@@ -74,7 +74,7 @@ const closeMenu = () => {
               @click="closeMenu"
               to="/login"
               class="btn btn-outline-success"
-              >Login</router-link
+              >Login/Register</router-link
             >
           </li>
         </ul>

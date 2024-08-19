@@ -14,7 +14,7 @@ const toggleMini = ref(false);
 const user = ref({});
 
 onMounted(() => {
-  user.value = JSON.parse(localStorage.getItem("user") || "{}");
+  user.value = JSON.parse(localStorage.getItem("loggedInUser") || "{}");
 });
 
 const menuItems = [
@@ -101,7 +101,9 @@ const logOut = () => {
           variant="text"
           @click.stop="sidebarMenu = !sidebarMenu"
         ></v-app-bar-nav-icon>
-
+   <h4>
+          Welcome <span class="text-white">{{ user.name }}</span>
+        </h4>
         <v-spacer></v-spacer>
         <v-btn icon>
           <v-icon>fa-bell</v-icon>
