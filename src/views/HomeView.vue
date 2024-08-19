@@ -6,7 +6,7 @@ const loading = ref(true);
 onMounted(() => {
   setTimeout(() => {
     loading.value = false;
-  }, 2000);
+  }, 1000);
 });
 </script>
 
@@ -25,36 +25,34 @@ onMounted(() => {
       </div>
     </div>
     <div v-else class="slider-area">
-      <div class="slider-active">
-        <div class="single-slider slider-height d-flex align-items-center">
-          <div class="container">
-            <div class="row">
-              <div class="col-xl-6 col-lg-9 col-md-10">
-                <div class="hero__caption">
-                  <h1 class="text-white">
-                    Welcome to Ogun State Job Application Portal
-                  </h1>
-                </div>
+      <div class="single-slider slider-height d-flex align-items-center">
+        <div class="container" style="position: relative; z-index: 2">
+          <div class="row">
+            <div class="col-xl-6 col-lg-9 col-md-10">
+              <div class="hero__caption">
+                <h1 class="text-white">
+                  Welcome to Ogun State Job Application Portal
+                </h1>
               </div>
             </div>
+          </div>
 
-            <div class="row">
-              <div class="">
-                <div class="d-flex action_buttons">
-                  <div class="">
-                    <router-link
-                      to="/job-listings"
-                      class="btn btn-outline-success me-2 text-white"
-                      >Find Jobs</router-link
-                    >
-                  </div>
-                  <div>
-                    <router-link
-                      to="/apply"
-                      class="btn btn-outline-success text-white"
-                      >Upload Resume</router-link
-                    >
-                  </div>
+          <div class="row">
+            <div class="">
+              <div class="d-flex action_buttons">
+                <div class="">
+                  <router-link
+                    to="/job-listings"
+                    class="btn btn-outline-success me-2 text-white"
+                    >Find Jobs</router-link
+                  >
+                </div>
+                <div>
+                  <router-link
+                    to="/apply"
+                    class="btn btn-outline-success text-white"
+                    >Upload Resume</router-link
+                  >
                 </div>
               </div>
             </div>

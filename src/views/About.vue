@@ -1,24 +1,19 @@
 <template>
   <div class="about">
     <!-- Hero Area Start-->
-    <div class="slider-area">
+    <div class="slider-area position-relative">
+      <img src="../../assets/img/hero/landingHero1.png" alt="" />
       <div
-        class="single-slider section-overlay slider-height d-flex align-items-center"    
+        class="d-flex align-items-center justify-content-center position-absolute top-0  w-100 h-100 top-50"
       >
-        <div class="container">
-          <div class="row">
-            <div class="col-xl-12">
-              <div class="hero-cap text-center">
-                <h2>About us</h2>
-              </div>
-            </div>
-          </div>
+        <div class="text-center">
+          <h2 class="text-white mt-5">About us</h2>
         </div>
       </div>
     </div>
     <!-- Hero Area End -->
     <!-- Support Company Start-->
-    <div class="support-company-area fix section-padding2">
+    <div class="support-company-area fix section-padding">
       <div class="container">
         <div class="row align-items-center">
           <div class="col-xl-6 col-lg-6">
@@ -205,5 +200,4 @@
   </div>
 </template>
 
-<style>
-</style>
+<style></style>

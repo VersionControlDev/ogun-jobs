@@ -1,9 +1,10 @@
 @import url("https://fonts.googleapis.com/css?family=Barlow:300,400,500,600,700,900|Muli:300,400,500,600,700,800,900&display=swap");
 
-html, body {
+html,
+body {
     margin: 0;
-    padding: 0;   
-    box-sizing: border-box;    
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
@@ -60,14 +61,35 @@ body {
 }
 
 .single-slider {
-    background: url('../img/hero/landingHero.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: right top;
-    width: 100%;
+    position: relative;
+    background: linear-gradient(to right, rgba(16, 41, 16, 0.6), transparent),
+        url('../img/hero/gateway_hero1.jpg') no-repeat;
+    max-width: 100%;
+    margin-left: auto;
     display: block;
 }
 
+.single-slider::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(32, 68, 32, 0.6);
+    z-index: 1;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 480px) {
+    .single-slider {
+        position: relative;
+        background: linear-gradient(to right, rgba(16, 41, 16, 0.6), transparent),
+            url('../img/hero/gateway_hero.jpg') no-repeat;
+        max-width: 100%;
+        margin-left: auto;
+        display: block;
+    }
+}
 
 .boxed-btn {
     background: #fff;
@@ -5840,25 +5862,6 @@ del {
     .slider-area .hero__caption h1 {
         font-size: 55px
     }
-}
-
-.hero-overly {
-    position: relative;
-    z-index: 0
-}
-
-.hero-overly::before {
-    position: absolute;
-    content: "";
-    background-color: rgba(32, 54, 38, 0.3);
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    z-index: -1;
-    background-repeat: no-repeat
 }
 
 .slider-area .hero-cap h2 {

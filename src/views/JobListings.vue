@@ -6,21 +6,16 @@ import AvailableJobs from "./employer/AvailableJobs.vue";
   <div class="find-jobs">
     <main>
       <!-- Hero Area Start-->
-      <div class="slider-area">
-        <div
-          class="single-slider section-overlay slider-height d-flex align-items-center"
-        >
-          <div class="container">
-            <div class="row">
-              <div class="col-xl-12">
-                <div class="hero-cap text-center">
-                  <h2>Get your job</h2>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="slider-area position-relative">
+      <img src="../../assets/img/hero/landingHero1.png" alt="" />
+      <div
+        class="d-flex align-items-center justify-content-center position-absolute top-0  w-100 h-100 top-50"
+      >
+        <div class="text-center">
+          <h2 class="text-white mt-5">Find Available Jobs Here</h2>
         </div>
       </div>
+    </div>
       <AvailableJobs />
 
       <!-- Job List Area End -->
